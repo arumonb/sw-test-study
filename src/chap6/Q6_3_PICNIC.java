@@ -8,6 +8,7 @@ public class Q6_3_PICNIC {
 	static int N;
 	static int M;
 	static int AnswerN;
+	static boolean[][] areFriends = new boolean[10][10];
 
 	public static void main(String args[]) throws Exception {
 		/*
@@ -31,28 +32,63 @@ public class Q6_3_PICNIC {
 			 * 각 테스트 케이스를 표준 입력에서 읽어옵니다.
 			 */
 
+			boolean[] taken = new boolean[10];
+			// areFriends 초기화
+			// taken 초기화
+			for (int j = 0; j < taken.length; j++) {
+				taken[j] = false;
+				for (int i = 0; i < taken.length; i++) {
+					areFriends[j][i] = false;
+				}
+			}
+			
 			N = sc.nextInt();
 			M = sc.nextInt();
 			for (int i = 0; i < M; i++) {
-				System.out.println(sc.next() + " " + sc.next());
 				
-//				친구가 n 명일 경우 나올 수 있는 경우의 수는 n(n-1)/2, n이 홀수인경우는 무조건 0
-//				첫번째 매칭을 제외하면 n-2명인 경우와 동일 (재귀 적용가능)
+				int x = Integer.parseInt(sc.next());
+				int y = Integer.parseInt(sc.next());
+				
+//				System.out.println(x + " " + y);
+				areFriends[x][y] = true;
+				areFriends[y][x] = true;
+				
 			}
-
+			
 			// ///////////////////////////////////////////////////////////////////////////////////////////
 			/*
 			 * 이 부분에 여러분의 알고리즘 구현이 들어갑니다. 여러분의 정답은 AnswerN에 저장되는 것을 가정하였습니다.
 			 */
 			// ///////////////////////////////////////////////////////////////////////////////////////////
 			
-			
-			
+			AnswerN = countPairings(taken);
 
 			// 표준출력(화면)으로 답안을 출력합니다.
 
-			System.out.println("#" + test_case + " " + AnswerN);
+//			System.out.println("#" + test_case + " " + AnswerN);
+			System.out.println(AnswerN);
 		}
 	}
+	
+	private static int countPairings(boolean[] taken) {
+		int firstFree = -1;
 
+		for(int i=0;i<N;++i) {
+			if(!taken[i]) {
+				firstFree = i;
+				break;
+			}
+		}
+		if(firstFree == -1) return 1;
+		int ret = 0;
+		for (int pairWith = firstFree + 1; pairWith < N; ++pairWith) {
+			if(!taken[pairWith] && areFriends[firstFree][pairWith]) {
+				taken[firstFree] = taken[pairWith] = true;
+				ret += countPairings(taken);
+				taken[firstFree] = taken[pairWith] = false;
+			}
+		}
+		return ret;
+	}
+ 
 }
