@@ -1,3 +1,6 @@
+/*
+ * 교재 해답을 java로 포팅
+ */
 package chap9;
 
 import java.io.FileInputStream;

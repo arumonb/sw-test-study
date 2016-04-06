@@ -1,7 +1,6 @@
 package chap6;
 
 import java.io.FileInputStream;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class BOARDCOVER {
@@ -31,9 +30,6 @@ public class BOARDCOVER {
 			/*
 			 * 각 테스트 케이스를 표준 입력에서 읽어옵니다.
 			 */
-
-			
-			
 			H = sc.nextInt();
 			W = sc.nextInt();
 			

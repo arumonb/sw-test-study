@@ -68,6 +68,7 @@ public class PICNIC {
 //			System.out.println("#" + test_case + " " + AnswerN);
 			System.out.println(AnswerN);
 		}
+		sc.close();
 	}
 	
 	private static int countPairings(boolean[] taken) {
