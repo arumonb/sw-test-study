@@ -3,7 +3,7 @@ package chap6;
 import java.io.FileInputStream;
 import java.util.Scanner;
 
-public class Q6_3_PICNIC {
+public class PICNIC {
 
 	static int N;
 	static int M;
@@ -18,7 +18,7 @@ public class Q6_3_PICNIC {
 		 * 주석을 지우고 이 메소드를 사용하셔도 좋습니다. 단, 채점을 위해 코드를 제출하실 때에는 반드시 이 메소드를 지우거나 주석
 		 * 처리 하셔야 합니다.
 		 */
-		System.setIn(new FileInputStream("input/chap6/6_3_PICNIC.txt"));
+		System.setIn(new FileInputStream("input/chap6/PICNIC.txt"));
 
 		/*
 		 * 표준입력 System.in 으로부터 스캐너를 만들어 데이터를 읽어옵니다.
