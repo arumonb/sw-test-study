@@ -1,13 +1,19 @@
 package chap8;
 
 import java.io.FileInputStream;
+import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * @author SDS
+ * 미완성
+ */
 public class PI {
 
 	
 	static int AnswerN;
 	static int[] arr = new int[10000];
+	static String input;
 	
 	public static void main(String[] args) throws Exception {
 		
@@ -33,7 +39,7 @@ public class PI {
 //		12673939 
 		
 		for (int test_case = 1; test_case <= T; test_case++) {
-			String input = sc.next();
+			input = sc.next();
 			
 			int l = input.length();
 			
@@ -64,16 +70,20 @@ public class PI {
 	private static int aaa(int start, int end) throws Exception {
 		int r = 0;
 		if(end - start <= 5) {
-			r = eval(start, end);
+			r = classify(start, end);
 		}else{
+			int a = 0;
+			int b = 0;
+			int c = 0;
 			// 처음 3개 자르고
-			r = eval(start, start + 2) + aaa(start + 3, end);
+			a = classify(start, start + 2) + aaa(start + 3, end);
 			
 			// 4개 자르고
-			r = eval(start, start + 3) + aaa(start + 4, end);
+			b = classify(start, start + 3) + aaa(start + 4, end);
 			
 			// 5개 자르고
-			r = eval(start, start + 5) + aaa(start + 5, end);
+			c = classify(start, start + 5) + aaa(start + 5, end);
+			r = Math.min(a, Math.min(b, c));
 		}
 		
 		
@@ -81,8 +91,33 @@ public class PI {
 	}
 	
 	
-	private static int eval(int start, int end) {
-		int k = 0;
-		return k;
+	private static int classify(int a, int b) {
+//		System.out.println("a=" + a + ",b=" + b);
+		String M = input.substring(a, b);
+//		System.out.println("M=" + M);
+		char[] arr = new char[M.length()];
+		Arrays.fill(arr, M.charAt(0));
+		if(M.equals(new String(arr))) {
+			return 1;
+		}
+		boolean progressive = true;
+		for (int i = 0; i < M.length()-1; i++) {
+			if(M.charAt(i + 1) - M.charAt(i) != M.charAt(1) - M.charAt(0)) {
+				progressive = false;
+			}
+		}
+		if(progressive && Math.abs(M.charAt(1) - M.charAt(0)) == 1) {
+			return 2;
+		}
+		
+		boolean alternating = true;
+		for (int i = 0; i < M.length(); i++) {
+			if(M.charAt(i) != M.charAt(i % 2)) {
+				alternating = false;
+			}
+		}
+		if(alternating) return 4;
+		if(progressive) return 5;
+		return 10;
 	}
 }

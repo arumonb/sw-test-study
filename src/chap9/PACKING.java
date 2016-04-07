@@ -36,13 +36,11 @@ public class PACKING {
 				ARR[i][2] = 0;
 			}
 			
-			// 절박도/부피 가 가장 큰 순으로 
-			
 			// 일단 무식하게풀기
 			SUMP = 0;
 			SUMC = 0;
 			
-			aaa(ARR, 0);
+			calc(ARR, 0);
 			int count = 0;
 			String k = "";
 			for (int i = 0; i < N; i++) {
@@ -62,7 +60,7 @@ public class PACKING {
 		sc.close();
 	}
 	
-	private static void aaa(int[][] arr, int index) {
+	private static void calc(int[][] arr, int index) {
 		sb = new StringBuffer();
 		int c = 0;
 		int p = 0;
@@ -74,8 +72,8 @@ public class PACKING {
 				p += arr[i][1];
 			}
 		}
-		String r = sb.toString();
 		
+		String r = sb.toString();
 		int v = Integer.parseInt(r, 2);
 		
 		if(c <= C && v != 0) {
@@ -90,7 +88,7 @@ public class PACKING {
 		for (int i = 0 ;i<N;i++) {
 			if(arr[i][2] == 1) continue;
 			arr[i][2] = 1;
-			aaa(arr, i);
+			calc(arr, i);
 			arr[i][2] = 0;
 		}
 	}
